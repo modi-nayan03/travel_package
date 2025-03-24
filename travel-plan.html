@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <title>Your Goa Travel Plan - MakeMyTrip</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <style>
+        /* Modern Color Palette */
+        :root {
+            --primary-color: #007bff;
+            /* Blue */
+            --secondary-color: #6c757d;
+            /* Gray */
+            --accent-color: #ffc107;
+            /* Yellow */
+            --light-bg: #f8f9fa;
+            /* Light Gray */
+            --dark-text: #343a40;
+            /* Dark Gray */
+            --muted-text: #6c757d;
+            /* Muted Gray */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header-area {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            /* Stick to the top */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav li {
+            margin-left: 20px;
+        }
+
+        .nav li a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .nav li a:hover,
+        .nav li a.active {
+            color: var(--primary-color);
+            background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover/active */
+        }
+
+        /* Mobile Menu Trigger */
+        .menu-trigger {
+            cursor: pointer;
+            display: none;
+            font-size: 1.5em;
+        }
+
+        /* Responsive Navigation */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+            }
+
+            .nav li {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+
+            .nav li a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+            }
+
+            .nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .nav.active {
+                display: flex;
+            }
+
+            .menu-trigger {
+                display: block;
+            }
+        }
+
+        /* Travel Plan Section */
+        .travel-plan {
+            padding: 50px 0;
+        }
+
+        .travel-plan h2,
+        .travel-plan h3 {
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Booking Summary */
+        .booking-summary {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .booking-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .booking-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted-text);
+        }
+
+        .info-item i {
+            color: var(--primary-color);
+        }
+
+        .booking-price {
+            text-align: right;
+        }
+
+        .price-tag {
+            color: var(--muted-text);
+            font-size: 14px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Day-wise Itinerary */
+        .day-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .day-header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-header h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .day-header .date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .day-content {
+            padding: 20px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: 12px;
+            width: 1px;
+            height: calc(100% - 12px);
+            background-color: #ddd;
+            z-index: 0;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .time {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .activity h5 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .activity p {
+            color: var(--muted-text);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Hotel Details */
+        .hotel-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .hotel-info {
+            padding: 20px;
+        }
+
+        .location {
+            color: var(--muted-text);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .amenities span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--muted-text);
+            font-size: 0.9rem;
+        }
+
+        .amenities i {
+            color: var(--primary-color);
+        }
+
+        .room-details h5 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .room-details p {
+            color: var(--muted-text);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .room-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .room-details ul li {
+            margin-bottom: 5px;
+            color: var(--muted-text);
+            font-size: 0.9rem;
+        }
+
+        /* Transportation Details */
+        .transport-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .transport-item {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            gap: 15px;
+        }
+
+        .transport-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .transport-info h5 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .transport-info p {
+            color: var(--muted-text);
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            color: var(--muted-text);
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .booking-details {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .booking-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .booking-price {
+                text-align: left;
+            }
+
+            .transport-card {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Area Start -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.png" alt="MakeMyTrip">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="deals.html">Deals</a></li>
+                            <li><a href="reservation.html">Reservation</a></li>
+                            <li><a href="reservation.html">Book Yours</a></li>
+                        </ul>   
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header Area End -->
+
+    <!-- Travel Plan Content -->
+    <div class="travel-plan">
+        <div class="container">
+            <!-- Booking Summary -->
+            <div class="booking-summary">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Your Goa Travel Plan</h2>
+                        <div class="booking-details">
+                            <div class="booking-info">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                            <div class="booking-price">
+                                <div class="price-tag">Total Amount</div>
+                                <div class="price">₹30,000</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day-wise Itinerary -->
+            <div class="day-wise-itinerary">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel Details -->
+            <div class="hotel-details">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>Hotel Details</h3>
+                        <div class="hotel-card">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img src="assets/images/destinations/goa-beach.jpg" alt="Hotel Image">
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="hotel-info">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transportation Details -->
+            <div class="transportation-details">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>Transportation Details</h3>
+                        <div class="transport-card">
+                            <div class="transport-item">
+                                <div class="transport-icon">
+                                    <i class="fa fa-plane"></i>
+                                </div>
+                                <div class="transport-info">
+                                    <h5>Flight Details</h5>
+                                    <p>Mumbai → Goa</p>
+                                    <p>Air India AI-123</p>
+                                    <p>Departure: 10:00 AM</p>
+                                    <p>Arrival: 11:30 AM</p>
+                                </div>
+                            </div>
+                            <div class="transport-item">
+                                <div class="transport-icon">
+                                    <i class="fa fa-car"></i>
+                                </div>
+                                <div class="transport-info">
+                                    <h5>Local Transportation</h5>
+                                    <p>Airport Pick-up & Drop-off</p>
+                                    <p>Daily Sightseeing by AC Vehicle</p>
+                                    <p>Driver cum Guide</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright © 2024 MakeMyTrip. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <script>
+        // Get URL parameters
+        function getUrlParameters() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                packageType: params.get('packageType'),
+                Area: params.get('Area'),
+                checkIn: params.get('checkIn'),
+                checkOut: params.get('checkOut'),
+                Guests: params.get('Guests'),
+                tripDays: params.get('tripDays'),
+                totalPrice: params.get('totalPrice')
+            };
+        }
+
+        // Package-specific activities
+        const packageActivities = {
+            beach: [
+                { time: '09:00 AM', title: 'Beach Visit', description: 'Relax at Calangute Beach' },
+                { time: '11:00 AM', title: 'Water Sports', description: 'Parasailing and Jet Ski' },
+                { time: '02:00 PM', title: 'Lunch', description: 'Beachside restaurant' },
+                { time: '04:00 PM', title: 'Beach Hopping', description: 'Visit Baga and Anjuna Beaches' },
+                { time: '07:00 PM', title: 'Sunset Cruise', description: 'Romantic evening cruise' }
+            ],
+            adventure: [
+                { time: '09:00 AM', title: 'Scuba Diving', description: 'Underwater adventure at Grande Island' },
+                { time: '11:30 AM', title: 'Parasailing', description: 'Thrilling parasailing experience' },
+                { time: '02:00 PM', title: 'Lunch', description: 'Beach shack lunch' },
+                { time: '04:00 PM', title: 'Jungle Trek', description: 'Adventurous trek in Western Ghats' },
+                { time: '07:00 PM', title: 'Campfire', description: 'Evening campfire with BBQ' }
+            ],
+            heritage: [
+                { time: '09:00 AM', title: 'Church Tour', description: 'Visit Basilica of Bom Jesus and Se Cathedral' },
+                { time: '11:30 AM', title: 'Heritage Walk', description: 'Explore Old Quarter' },
+                { time: '02:00 PM', title: 'Lunch', description: 'Traditional Goan restaurant' },
+                { time: '04:00 PM', title: 'Spice Plantation', description: 'Tour of spice gardens' },
+                { time: '07:00 PM', title: 'Cultural Show', description: 'Traditional dance performance' }
+            ],
+            wellness: [
+                { time: '07:00 AM', title: 'Morning Yoga', description: 'Sunrise yoga session' },
+                { time: '09:00 AM', title: 'Meditation', description: 'Guided meditation class' },
+                { time: '11:00 AM', title: 'Spa Treatment', description: 'Rejuvenating spa session' },
+                { time: '02:00 PM', title: 'Lunch', description: 'Healthy organic lunch' },
+                { time: '04:00 PM', title: 'Ayurvedic Treatment', description: 'Traditional Ayurvedic therapy' }
+            ]
+        };
+
+        // Hotel details based on package
+        const hotelDetails = {
+            beach: {
+                name: 'Beachfront Resort (4 Star)',
+                location: 'Calangute Beach, North Goa',
+                amenities: ['Free WiFi', 'Pool', 'Restaurant', 'Spa'],
+                roomType: 'Deluxe Sea View Room with Balcony'
+            },
+            adventure: {
+                name: 'Adventure Resort (4 Star)',
+                location: 'Baga Beach, North Goa',
+                amenities: ['Free WiFi', 'Adventure Center', 'Restaurant', 'Gym'],
+                roomType: 'Adventure Suite with Mountain View'
+            },
+            heritage: {
+                name: 'Heritage Hotel (4 Star)',
+                location: 'Old Quarter, Panjim',
+                amenities: ['Free WiFi', 'Heritage Restaurant', 'Library', 'Garden'],
+                roomType: 'Heritage Suite with Colonial View'
+            },
+            wellness: {
+                name: 'Spa Resort (5 Star)',
+                location: 'South Goa',
+                amenities: ['Free WiFi', 'Spa Center', 'Yoga Studio', 'Organic Restaurant'],
+                roomType: 'Wellness Suite with Garden View'
+            }
+        };
+
+        // Update travel plan based on parameters
+        function updateTravelPlan() {
+            const params = getUrlParameters();
+            const tripDays = parseInt(params.tripDays);
+            const packageType = params.packageType;
+            const area = params.Area;
+            const guests = params.Guests;
+            const totalPrice = params.totalPrice;
+
+            // Update booking summary
+            document.querySelector('.booking-info').innerHTML = `
+        <div class="info-item">
+          <i class="fa fa-calendar"></i>
+          <span>${tripDays} Days / ${tripDays - 1} Nights</span>
+        </div>
+        <div class="info-item">
+          <i class="fa fa-users"></i>
+          <span>${guests} ${parseInt(guests) > 1 ? 'Adults' : 'Adult'}</span>
+        </div>
+        <div class="info-item">
+          <i class="fa fa-hotel"></i>
+          <span>${hotelDetails[packageType].name}</span>
+        </div>
+        <div class="info-item">
+          <i class="fa fa-map-marker"></i>
+          <span>${area}</span>
+        </div>
+      `;
+
+            // Update price display
+            document.querySelector('.booking-price .price').textContent = totalPrice;
+
+            // Update hotel details
+            const hotelInfo = hotelDetails[packageType];
+            document.querySelector('.hotel-info').innerHTML = `
+        <h4>${hotelInfo.name}</h4>
+        <p class="location"><i class="fa fa-map-marker"></i> ${hotelInfo.location}</p>
+        <div class="amenities">
+          ${hotelInfo.amenities.map(amenity => `
+            <span><i class="fa fa-check"></i> ${amenity}</span>
+          `).join('')}
+        </div>
+        <div class="room-details">
+          <h5>Room Details</h5>
+          <p>${hotelInfo.roomType}</p>
+          <ul>
+            <li>King Size Bed</li>
+            <li>Air Conditioning</li>
+            <li>Mini Bar</li>
+            <li>Room Service</li>
+          </ul>
+        </div>
+      `;
+
+            // Generate day-wise itinerary
+            const itineraryContainer = document.querySelector('.day-wise-itinerary .row .col-lg-12');
+            itineraryContainer.innerHTML = '<h3>Day-wise Itinerary</h3>';
+
+            for (let day = 1; day <= tripDays; day++) {
+                const date = new Date(params.checkIn);
+                date.setDate(date.getDate() + day - 1);
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+
+                let dayTitle = '';
+                let activities = [];
+
+                if (day === 1) {
+                    dayTitle = 'Arrival in Goa';
+                    activities = [
+                        { time: '12:00 PM', title: 'Arrival at Goa International Airport', description: 'Meet and greet by our representative' },
+                        { time: '01:30 PM', title: 'Transfer to Hotel', description: 'Check-in at hotel' },
+                        { time: '03:00 PM', title: 'Welcome Lunch', description: 'Traditional Goan cuisine at hotel restaurant' },
+                        { time: '05:00 PM', title: 'Beach Visit', description: 'Relax at nearby beach' }
+                    ];
+                } else if (day === tripDays) {
+                    dayTitle = 'Departure';
+                    activities = [
+                        { time: '09:00 AM', title: 'Breakfast', description: 'Hotel buffet breakfast' },
+                        { time: '11:00 AM', title: 'Check-out', description: 'Departure from hotel' },
+                        { time: '12:00 PM', title: 'Airport Transfer', description: 'Transfer to Goa International Airport' }
+                    ];
+                } else {
+                    dayTitle = `${packageType.charAt(0).toUpperCase() + packageType.slice(1)} Activities`;
+                    activities = packageActivities[packageType];
+                }
+
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                dayCard.innerHTML = `
+          <div class="day-header">
+            <h4>Day ${day}: ${dayTitle}</h4>
+            <span class="date">${formattedDate}</span>
+          </div>
+          <div class="day-content">
+            <div class="timeline">
+              ${activities.map(activity => `
+                <div class="timeline-item">
+                  <span class="time">${activity.time}</span>
+                  <div class="activity">
+                    <h5>${activity.title}</h5>
+                    <p>${activity.description}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+                itineraryContainer.appendChild(dayCard);
+            }
+        }
+
+        // Initialize the travel plan when the page loads
+        document.addEventListener('DOMContentLoaded', updateTravelPlan);
+    </script>
+    <script>
+        document.querySelector('.menu-trigger').addEventListener('click', function () {
+            document.querySelector('.nav').classList.toggle('active');
+        });
+    </script>
+
+</body>
+
+</html>

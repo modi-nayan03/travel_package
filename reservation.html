@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <title>MakeMyTrip - Goa Package Reservation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+  <!-- Custom CSS  -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+              <img src="assets/images/logo.png" alt="MakeMyTrip">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="deals.html">Deals</a></li>
+                        <li><a href="reservation.html" class="active">Reservation</a></li>
+                        <li><a href="reservation.html">Book Yours</a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="second-page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4>Your Goa Getaway Awaits!</h4>
+          <h2>Complete Your Reservation</h2>
+          <p>Fill in the details below to book your preferred Goa package. Get ready for an unforgettable trip!</p>
+          <div class="main-button"><a href="about.html">Explore Goa</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Information -->
+  <div class="more-info reservation-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-phone"></i>
+            <h4>Need Assistance? Call Us</h4>
+            <a href="tel:+18001234567">+1800 123 4567</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-envelope"></i>
+            <h4>Email Us Your Queries</h4>
+            <a href="mailto:goa@makemytrip.com">goa@makemytrip.com</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-map-marker"></i>
+            <h4>Our Headquarters</h4>
+            <a href="#">Gurugram, Haryana, India</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reservation Form -->
+  <div class="reservation-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="package-selection">
+            <!-- Filter Section -->
+            <div class="filter-section">
+              <div class="row">
+                <div class="col-lg-12">
+                  <h4>Refine Your Package Choices</h4>
+                  <div class="filter-stats">
+                    <span id="packageCount">Showing packages</span>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="filter-item">
+                    <label for="citySelect">Select City</label>
+                    <select id="citySelect" class="form-select">
+                      <option value="all">All Cities</option>
+                      <option value="agra">Agra</option>
+                      <option value="jaipur">Jaipur</option>
+                      <option value="goa">Goa</option>
+                      <option value="kerala">Kerala</option>
+                      <option value="mumbai">Mumbai</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="filter-item">
+                    <label for="priceRange">Price Range</label>
+                    <select id="priceRange" class="form-select">
+                      <option value="all">All Prices</option>
+                      <option value="0-15000">Under ₹15,000</option>
+                      <option value="15000-20000">₹15,000 - ₹20,000</option>
+                      <option value="20000+">Above ₹20,000</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="filter-item">
+                    <label for="duration">Trip Duration</label>
+                    <select id="duration" class="form-select">
+                      <option value="all">Any Duration</option>
+                      <option value="3">3 Days</option>
+                      <option value="5">5 Days</option>
+                      <option value="7">7 Days</option>
+                      <option value="10">10 Days</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="filter-item">
+                    <label for="activities">Activities Included</label>
+                    <select id="activities" class="form-select">
+                      <option value="all">All Activities</option>
+                      <option value="sightseeing">Sightseeing</option>
+                      <option value="adventure">Adventure</option>
+                      <option value="heritage">Heritage Tour</option>
+                      <option value="cultural">Cultural Experience</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="filter-item">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" class="form-control" min="">
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="filter-item">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" class="form-control" min="">
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="filter-buttons">
+                    <button class="main-button" id="applyFilters">Apply Filters</button>
+                    <button class="main-button secondary" id="resetFilters">Reset Filters</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Package Cards -->
+            <div class="row" id="packageCards">
+              <div class="col-lg-3 col-md-6">
+                <div class="package-card">
+                  <img src="assets/images/destinations/goa-beach.jpg" alt="Beach Package">
+                  <div class="package-info">
+                    <h4>Goa Beach Bliss</h4>
+                    <p>Sun, sand, and sea! Enjoy pristine beaches, exciting water sports, and comfortable beachfront
+                      accommodation.</p>
+                    <div class="price">From ₹15,000</div>
+                    <button class="tab-button active" data-package="beach">Select Package</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="package-card">
+                  <img src="assets/images/destinations/goa-adventure.jpg" alt="Adventure Package">
+                  <div class="package-info">
+                    <h4>Goa Adventure Awaits</h4>
+                    <p>Thrill-seekers unite! Scuba diving, adventurous trekking, and exhilarating water sports
+                      activities.</p>
+                    <div class="price">From ₹18,000</div>
+                    <button class="tab-button" data-package="adventure">Select Package</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="package-card">
+                  <img src="assets/images/destinations/goa-heritage.jpg" alt="Heritage Package">
+                  <div class="package-info">
+                    <h4>Goa Heritage Trail</h4>
+                    <p>Discover Goa's rich past! Explore ancient temples, colonial architecture, and vibrant cultural
+                      shows.</p>
+                    <div class="price">From ₹12,000</div>
+                    <button class="tab-button" data-package="heritage">Select Package</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="package-card">
+                  <img src="assets/images/destinations/goa-wellness.jpg" alt="Wellness Package">
+                  <div class="package-info">
+                    <h4>Goa Wellness Retreat</h4>
+                    <p>Rejuvenate your mind and body! Indulge in spa treatments, yoga sessions, and calming meditation
+                      classes.</p>
+                    <div class="price">From ₹20,000</div>
+                    <button class="tab-button" data-package="wellness">Select Package</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="col-lg-12">
+          <form id="reservation-form" name="gs" method="post" role="search" onsubmit="return submitForm()">
+            <div class="row">
+              <div class="col-lg-12">
+                <h4>Complete Your <em>Goa</em> Booking With This <em>Form</em></h4>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="Name" class="form-label">Your Full Name*</label>
+                  <input type="text" name="Name" class="Name" placeholder="Enter your full name" autocomplete="name"
+                    required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                  <fieldset>
+                  <label for="Number" class="form-label">Your Phone Number*</label>
+                  <input type="tel" name="Number" class="Number" placeholder="Enter your phone number"
+                    autocomplete="tel" required>
+                  </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="chooseGuests" class="form-label">Number of Guests*</label>
+                  <select name="Guests" class="form-select" aria-label="Number of guests" id="chooseGuests" required>
+                    <option value="" selected disabled>Select number of guests</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5+">5+ Guests</option>
+                  </select>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                  <fieldset>
+                  <label for="packageType" class="form-label">Select Package Type*</label>
+                  <select name="packageType" class="form-select" id="packageType" required>
+                    <option value="" selected disabled>Choose your preferred package</option>
+                    <option value="beach">Beach Package</option>
+                    <option value="adventure">Adventure Package</option>
+                    <option value="heritage">Heritage Package</option>
+                    <option value="wellness">Wellness Package</option>
+                      </select>
+                  </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="checkIn" class="form-label">Check-In Date*</label>
+                  <input type="date" name="checkIn" id="checkIn" class="date form-control" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="checkOut" class="form-label">Check-Out Date*</label>
+                  <input type="date" name="checkOut" id="checkOut" class="date form-control" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                  <fieldset>
+                  <label for="chooseArea" class="form-label">Preferred Area in Goa*</label>
+                  <select name="Area" class="form-select" aria-label="Preferred area in Goa" id="chooseArea"
+                    required>
+                    <option value="" selected disabled>Select your preferred area</option>
+                    <option value="north">North Goa - Beaches & Nightlife</option>
+                    <option value="south">South Goa - Serene Beaches</option>
+                    <option value="central">Central Goa - Heritage & Culture</option>
+                    <option value="panjim">Panjim - City Experience</option>
+                      </select>
+                  </fieldset>
+              </div>
+              <div class="col-lg-12">                        
+                  <fieldset>
+                  <label for="packageDetails" class="form-label">Selected Package Details</label>
+                  <div class="package-details" id="packageDetailsContent">
+                    <!-- Beach Package Details (Default) -->
+                    <div class="package-info" id="beach-details">
+                      <h5>Beach Package Inclusions:</h5>
+                      <ul>
+                        <li><i class="fa fa-check"></i> Beachfront Resort Stay (4 Star)</li>
+                        <li><i class="fa fa-check"></i> Exciting Water Sports Activities</li>
+                        <li><i class="fa fa-check"></i> Delicious Beach BBQ Dinner</li>
+                        <li><i class="fa fa-check"></i> Romantic Sunset Cruise</li>
+                        <li><i class="fa fa-check"></i> Convenient Airport Transfers</li>
+                      </ul>
+                      <div class="package-price">
+                        <h5>Package Price:</h5>
+                        <p class="price">Total Price: <span id="totalPrice">₹15,000</span></p>
+                        <p class="price-breakdown">Price per person: <span id="pricePerPerson">₹15,000</span></p>
+                      </div>
+                    </div>
+
+                    <!-- Adventure Package Details -->
+                    <div class="package-info" id="adventure-details" style="display: none;">
+                      <h5>Adventure Package Inclusions:</h5>
+                      <ul>
+                        <li><i class="fa fa-check"></i> Comfortable Adventure Resort Stay (4 Star)</li>
+                        <li><i class="fa fa-check"></i> Thrilling Scuba Diving Session</li>
+                        <li><i class="fa fa-check"></i> Exciting Parasailing Experience</li>
+                        <li><i class="fa fa-check"></i> Adventurous Jungle Trek</li>
+                        <li><i class="fa fa-check"></i> Convenient Airport Transfers</li>
+                      </ul>
+                      <div class="package-price">
+                        <h5>Package Price:</h5>
+                        <p class="price">Total Price: <span id="totalPrice">₹18,000</span></p>
+                        <p class="price-breakdown">Price per person: <span id="pricePerPerson">₹18,000</span></p>
+                      </div>
+                    </div>
+
+                    <!-- Heritage Package Details -->
+                    <div class="package-info" id="heritage-details" style="display: none;">
+                      <h5>Heritage Package Inclusions:</h5>
+                      <ul>
+                        <li><i class="fa fa-check"></i> Comfortable Heritage Hotel Stay (4 Star)</li>
+                        <li><i class="fa fa-check"></i> Historical Old Goa Church Tour</li>
+                        <li><i class="fa fa-check"></i> Informative Spice Plantation Visit</li>
+                        <li><i class="fa fa-check"></i> Authentic Traditional Goan Dinner</li>
+                        <li><i class="fa fa-check"></i> Convenient Airport Transfers</li>
+                      </ul>
+                      <div class="package-price">
+                        <h5>Package Price:</h5>
+                        <p class="price">Total Price: <span id="totalPrice">₹12,000</span></p>
+                        <p class="price-breakdown">Price per person: <span id="pricePerPerson">₹12,000</span></p>
+                      </div>
+                    </div>
+
+                    <!-- Wellness Package Details -->
+                    <div class="package-info" id="wellness-details" style="display: none;">
+                      <h5>Wellness Package Inclusions:</h5>
+                      <ul>
+                        <li><i class="fa fa-check"></i> Luxurious Spa Resort Stay (5 Star)</li>
+                        <li><i class="fa fa-check"></i> Rejuvenating Daily Yoga Sessions</li>
+                        <li><i class="fa fa-check"></i> Relaxing Ayurvedic Treatments</li>
+                        <li><i class="fa fa-check"></i> Calming Meditation Classes</li>
+                        <li><i class="fa fa-check"></i> Convenient Airport Transfers</li>
+                      </ul>
+                      <div class="package-price">
+                        <h5>Package Price:</h5>
+                        <p class="price">Total Price: <span id="totalPrice">₹20,000</span></p>
+                        <p class="price-breakdown">Price per person: <span id="pricePerPerson">₹20,000</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <label for="activities" class="form-label">Select Activities (Optional)</label>
+                  <div class="activities-grid">
+                    <div class="activity-item">
+                      <input type="checkbox" id="water_sports" name="activities" value="water_sports">
+                      <label for="water_sports">Water Sports</label>
+                    </div>
+                    <div class="activity-item">
+                      <input type="checkbox" id="beach_hopping" name="activities" value="beach_hopping">
+                      <label for="beach_hopping">Beach Hopping</label>
+                    </div>
+                    <div class="activity-item">
+                      <input type="checkbox" id="fort_visit" name="activities" value="fort_visit">
+                      <label for="fort_visit">Fort Visit</label>
+                    </div>
+                    <div class="activity-item">
+                      <input type="checkbox" id="spa" name="activities" value="spa">
+                      <label for="spa">Spa Treatment</label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <button class="main-button" type="submit">Book Your Goa Getaway Now!</button>
+                  </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2024 MakeMyTrip. All rights reserved.
+            <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>
+            Distribution: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/wow.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <script>
+    $(".option").click(function () {
+      $(".option").removeClass("active");
+      $(this).addClass("active"); 
+    });
+
+    // Package selection handling
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get elements
+      const packageSelect = document.getElementById('packageType');
+      const packageCards = document.querySelectorAll('.package-card');
+      const packageButtons = document.querySelectorAll('.package-card .tab-button');
+      const priceRange = document.getElementById('priceRange');
+      const duration = document.getElementById('duration');
+      const startDate = document.getElementById('startDate');
+      const endDate = document.getElementById('endDate');
+      const applyFilters = document.getElementById('applyFilters');
+
+      // Set minimum date for date inputs to today
+      const today = new Date().toISOString().split('T')[0];
+      startDate.min = today;
+      endDate.min = today;
+
+      // Update end date minimum when start date changes
+      startDate.addEventListener('change', function () {
+        endDate.min = this.value;
+        if (endDate.value && endDate.value < this.value) {
+          endDate.value = this.value;
+        }
+      });
+
+      // Function to update package details
+      function updatePackageDetails(packageType) {
+        // Hide all package details
+        document.querySelectorAll('.package-info').forEach(detail => {
+          detail.style.display = 'none';
+        });
+
+        // Show selected package details
+        const selectedDetails = document.getElementById(packageType + '-details');
+        if (selectedDetails) {
+          selectedDetails.style.display = 'block';
+        }
+
+        // Update package buttons
+        packageButtons.forEach(button => {
+          if (button.getAttribute('data-package') === packageType) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+
+        // Update dropdown selection
+        packageSelect.value = packageType;
+        
+        // Calculate price after package selection
+        calculatePrice();
+      }
+
+      // Function to filter packages
+      function filterPackages() {
+        const selectedPriceRange = priceRange.value;
+        const selectedDuration = duration.value;
+        const selectedStartDate = startDate.value;
+        const selectedEndDate = endDate.value;
+
+        packageCards.forEach(card => {
+          const price = parseInt(card.querySelector('.price span').textContent.replace(/[^0-9]/g, ''));
+          let showCard = true;
+
+          // Price filter
+          if (selectedPriceRange !== 'all') {
+            const [min, max] = selectedPriceRange.split('-').map(Number);
+            if (max) {
+              if (price < min || price > max) showCard = false;
+            } else {
+              if (price < min) showCard = false;
+            }
+          }
+
+          // Date filter
+          if (selectedStartDate && selectedEndDate) {
+            const start = new Date(selectedStartDate);
+            const end = new Date(selectedEndDate);
+            if (start > end) {
+              alert('End date must be after start date');
+              return;
+            }
+          }
+
+          //Duration filter
+          if (selectedDuration !== 'all') {
+            // Assuming duration is not explicitly stored in the HTML, you might need to determine the duration based on your package logic
+            // For example, you could add a 'data-duration' attribute to the package card:
+            // <div class="package-card" data-duration="3">
+            const cardDuration = card.dataset.duration; // Correctly access the data attribute
+            if (cardDuration && selectedDuration !== cardDuration) {
+              showCard = false;
+            }
+          }
+
+          // Show/hide card based on filters
+          card.style.display = showCard ? 'block' : 'none';
+        });
+      }
+
+      // Handle package card button clicks
+      packageButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const packageType = this.getAttribute('data-package');
+          updatePackageDetails(packageType);
+        });
+      });
+
+      // Handle dropdown selection change
+      packageSelect.addEventListener('change', function () {
+        updatePackageDetails(this.value);
+      });
+
+      // Handle filter button click
+      applyFilters.addEventListener('click', filterPackages);
+
+      // Set initial package (Beach Package)
+      updatePackageDetails('beach');
+    });
+
+    // Add new filter elements
+    const citySelect = document.getElementById('citySelect');
+    const resetFilters = document.getElementById('resetFilters');
+    const packageCount = document.getElementById('packageCount');
+
+    // Function to update package count
+    function updatePackageCount() {
+      const visibleCards = document.querySelectorAll('.package-card:not([style*="display: none"])').length;
+      packageCount.textContent = `Showing ${visibleCards} packages`;
+    }
+
+    // Function to reset all filters
+    function resetAllFilters() {
+      citySelect.value = 'all';
+      priceRange.value = 'all';
+      duration.value = 'all';
+      startDate.value = '';
+      endDate.value = '';
+      
+      // Show all package cards
+      packageCards.forEach(card => {
+        card.style.display = 'block';
+      });
+      
+      updatePackageCount();
+    }
+
+    // Enhanced filter function
+    function filterPackages() {
+      const selectedCity = citySelect.value;
+      const selectedPriceRange = priceRange.value;
+      const selectedDuration = duration.value;
+      const selectedStartDate = startDate.value;
+      const selectedEndDate = endDate.value;
+
+      packageCards.forEach(card => {
+        const price = parseInt(card.querySelector('.price span').textContent.replace(/[^0-9]/g, ''));
+        let showCard = true;
+
+        // City filter
+        if (selectedCity !== 'all') {
+          const cardCity = card.dataset.city;
+          if (cardCity && cardCity !== selectedCity) {
+            showCard = false;
+          }
+        }
+
+        // Price filter
+        if (selectedPriceRange !== 'all') {
+          const [min, max] = selectedPriceRange.split('-').map(Number);
+          if (max) {
+            if (price < min || price > max) showCard = false;
+          } else {
+            if (price < min) showCard = false;
+          }
+        }
+
+        // Date filter
+        if (selectedStartDate && selectedEndDate) {
+          const start = new Date(selectedStartDate);
+          const end = new Date(selectedEndDate);
+          if (start > end) {
+            alert('End date must be after start date');
+            return;
+          }
+        }
+
+        // Duration filter
+        if (selectedDuration !== 'all') {
+          const cardDuration = card.dataset.duration;
+          if (cardDuration && cardDuration !== selectedDuration) {
+            showCard = false;
+          }
+        }
+
+        // Show/hide card based on filters
+        card.style.display = showCard ? 'block' : 'none';
+      });
+
+      updatePackageCount();
+    }
+
+    // Add event listeners for new filters
+    citySelect.addEventListener('change', filterPackages);
+    priceRange.addEventListener('change', filterPackages);
+    duration.addEventListener('change', filterPackages);
+    resetFilters.addEventListener('click', resetAllFilters);
+
+    // Update package count on initial load
+    updatePackageCount();
+
+    // Add price calculation function
+    function calculatePrice() {
+      const packageType = document.getElementById('packageType').value;
+      const guests = document.getElementById('chooseGuests').value;
+      
+      // Base prices for each package
+      const basePrices = {
+        beach: 15000,
+        adventure: 18000,
+        heritage: 12000,
+        wellness: 20000
+      };
+
+      if (!packageType || !guests) return;
+
+      const basePrice = basePrices[packageType];
+      // Handle "5+" guests case
+      const numGuests = guests === "5+" ? 5 : parseInt(guests);
+      
+      // Calculate total price (apply 10% discount for 3+ guests)
+      let totalPrice = basePrice * numGuests;
+      if (numGuests >= 3) {
+        totalPrice = totalPrice * 0.9; // 10% discount
+      }
+
+      // Update price displays in all package details sections
+      document.querySelectorAll('.package-info').forEach(section => {
+        const pricePerPersonSpan = section.querySelector('#pricePerPerson');
+        const totalPriceSpan = section.querySelector('#totalPrice');
+        if (pricePerPersonSpan) {
+          pricePerPersonSpan.textContent = `₹${basePrice.toLocaleString()}`;
+        }
+        if (totalPriceSpan) {
+          totalPriceSpan.textContent = `₹${totalPrice.toLocaleString()}`;
+        }
+      });
+    }
+
+    // Add event listeners for price calculation
+    document.getElementById('packageType').addEventListener('change', calculatePrice);
+    document.getElementById('chooseGuests').addEventListener('change', calculatePrice);
+
+    // Update submitForm function to include price
+    function submitForm() {
+      // Get form values
+      var packageType = document.getElementById('packageType').value;
+      var Area = document.getElementById('chooseArea').value;
+      var checkIn = document.getElementById('checkIn').value;
+      var checkOut = document.getElementById('checkOut').value;
+      var Guests = document.getElementById('chooseGuests').value;
+      var totalPrice = document.getElementById('totalPrice').textContent;
+
+      // Calculate the number of days for the trip
+      var checkInDate = new Date(checkIn);
+      var checkOutDate = new Date(checkOut);
+      var tripDays = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+
+      // Construct URL parameters
+      var urlParams = `?packageType=${packageType}&Area=${Area}&checkIn=${checkIn}&checkOut=${checkOut}&Guests=${Guests}&tripDays=${tripDays}&totalPrice=${totalPrice}`;
+
+      // Redirect to travel-plan.html with URL parameters
+      window.location.href = 'travel-plan.html' + urlParams;
+
+      // Prevent the form from actually submitting
+      return false;
+    }
+
+    // Add to your existing JavaScript
+    document.getElementById('citySelect').addEventListener('change', function() {
+      const selectedCity = this.value;
+      
+      // Update page content based on selected city
+      if (selectedCity !== 'all') {
+        // Update URL parameter
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('city', selectedCity);
+        window.history.pushState({}, '', newUrl);
+        
+        // Update page content
+        updatePageContent(selectedCity);
+      } else {
+        // Show all packages
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.delete('city');
+        window.history.pushState({}, '', newUrl);
+        
+        // Show all cities' packages
+        showAllPackages();
+      }
+    });
+
+    // Function to show all packages from all cities
+    function showAllPackages() {
+      const packageCardsContainer = document.getElementById('packageCards');
+      packageCardsContainer.innerHTML = Object.values(cityPackages)
+        .flatMap(cityInfo => cityInfo.packages)
+        .map(pkg => `
+          <div class="col-lg-4 col-md-6">
+            <div class="package-card" data-duration="${pkg.duration.split(' ')[0]}" 
+                 data-activities="${pkg.activities.join(',')}">
+              <img src="${pkg.image}" alt="${pkg.name}">
+              <div class="package-info">
+                <h4>${pkg.name}</h4>
+                <p>${pkg.description}</p>
+                <div class="price">From ₹${pkg.price.toLocaleString()}</div>
+                <button class="tab-button" data-package="${pkg.id}">Select Package</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+      // Update package count
+      document.getElementById('packageCount').textContent = 
+        `Showing all packages from all cities`;
+        
+      // Reinitialize event listeners
+      initializeEventListeners();
+    }
+
+    // Add this city packages data structure
+    const cityPackages = {
+      agra: {
+        name: "Agra",
+        title: "Your Taj Mahal Experience Awaits!",
+        description: "Experience the grandeur of the Taj Mahal and Mughal architecture",
+        packages: [
+          {
+            id: "taj-special",
+            name: "Taj Special Package",
+            image: "assets/images/destinations/agra-taj.jpg",
+            description: "Visit the iconic Taj Mahal and explore Mughal heritage",
+            price: 25000,
+            duration: "3 Days / 2 Nights",
+            activities: ["sightseeing", "heritage"],
+            areas: ["Taj Ganj", "Fatehpur Sikri", "Agra Fort"],
+            inclusions: [
+              "Luxury Hotel Stay (5 Star)",
+              "Taj Mahal Visit with Guide",
+              "Agra Fort Tour",
+              "Fatehpur Sikri Excursion",
+              "Traditional Mughlai Dinner"
+            ]
+          },
+          {
+            id: "heritage-tour",
+            name: "Heritage Tour Package",
+            image: "assets/images/destinations/agra-heritage.jpg",
+            description: "Explore the rich heritage of Agra",
+            price: 20000,
+            duration: "4 Days / 3 Nights",
+            activities: ["heritage", "cultural"],
+            areas: ["Old Agra", "Mehtab Bagh", "Itmad-ud-Daulah"],
+            inclusions: [
+              "Heritage Hotel Stay",
+              "All Major Monuments",
+              "Cultural Show",
+              "Local Market Tour",
+              "Traditional Dinner"
+            ]
+          }
+        ]
+      },
+      jaipur: {
+        name: "Jaipur",
+        title: "Your Pink City Adventure Awaits!",
+        description: "Discover the royal heritage and cultural charm of Jaipur",
+        packages: [
+          {
+            id: "palace-tour",
+            name: "Royal Palace Tour",
+            image: "assets/images/destinations/jaipur-palace.jpg",
+            description: "Experience the royal heritage of Rajasthan",
+            price: 30000,
+            duration: "4 Days / 3 Nights",
+            activities: ["heritage", "cultural"],
+            areas: ["City Palace", "Amber Fort", "Hawa Mahal"],
+            inclusions: [
+              "Luxury Palace Hotel Stay",
+              "City Palace Tour",
+              "Amber Fort Visit",
+              "Elephant Ride",
+              "Royal Rajasthani Dinner"
+            ]
+          },
+          {
+            id: "cultural-tour",
+            name: "Cultural Experience",
+            image: "assets/images/destinations/jaipur-culture.jpg",
+            description: "Immerse yourself in Rajasthani culture",
+            price: 22000,
+            duration: "3 Days / 2 Nights",
+            activities: ["cultural", "shopping"],
+            areas: ["Old City", "Sanganer", "Nahargarh"],
+            inclusions: [
+              "Heritage Haveli Stay",
+              "Local Craft Workshops",
+              "Traditional Dance Show",
+              "Bazaar Tour",
+              "Cooking Class"
+            ]
+          }
+        ]
+      },
+      goa: {
+        name: "Goa",
+        title: "Your Beach Paradise Awaits!",
+        description: "Experience the perfect blend of beaches, culture, and nightlife",
+        packages: [
+          {
+            id: "beach-bliss",
+            name: "Beach Bliss Package",
+            image: "assets/images/destinations/goa-beach.jpg",
+            description: "Sun, sand, and sea! Perfect beach vacation",
+            price: 25000,
+            duration: "5 Days / 4 Nights",
+            activities: ["beach", "water-sports"],
+            areas: ["North Goa", "South Goa", "Panjim"],
+            inclusions: [
+              "Beachfront Resort Stay",
+              "Water Sports Activities",
+              "Beach BBQ Dinner",
+              "Sunset Cruise",
+              "Airport Transfers"
+            ]
+          },
+          {
+            id: "heritage-trail",
+            name: "Heritage Trail Package",
+            image: "assets/images/destinations/goa-heritage.jpg",
+            description: "Discover Goa's rich Portuguese heritage",
+            price: 20000,
+            duration: "4 Days / 3 Nights",
+            activities: ["heritage", "cultural"],
+            areas: ["Old Goa", "Fontainhas", "Panjim"],
+            inclusions: [
+              "Heritage Hotel Stay",
+              "Church Tours",
+              "Spice Plantation Visit",
+              "Local Food Trail",
+              "Cultural Show"
+            ]
+          }
+        ]
+      }
+    };
+
+    // Add this function to update page content based on selected city
+    function updatePageContent(cityId) {
+      const city = cityPackages[cityId];
+      if (!city) return;
+
+      // Update page title and description
+      document.querySelector('.second-page-heading h4').textContent = city.title;
+      document.querySelector('.second-page-heading h2').textContent = `Complete Your ${city.name} Reservation`;
+      document.querySelector('.second-page-heading p').textContent = city.description;
+
+      // Update package cards
+      const packageCardsContainer = document.getElementById('packageCards');
+      packageCardsContainer.innerHTML = city.packages.map(pkg => `
+        <div class="col-lg-3 col-md-6">
+          <div class="package-card" data-duration="${pkg.duration.split(' ')[0]}" 
+               data-activities="${pkg.activities.join(',')}" data-city="${cityId}">
+            <img src="${pkg.image}" alt="${pkg.name}">
+            <div class="package-info">
+              <h4>${pkg.name}</h4>
+              <p>${pkg.description}</p>
+              <div class="price">From ₹${pkg.price.toLocaleString()}</div>
+              <button class="tab-button" data-package="${pkg.id}">Select Package</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Update package type dropdown
+      const packageSelect = document.getElementById('packageType');
+      packageSelect.innerHTML = `
+        <option value="" selected disabled>Choose your preferred package</option>
+        ${city.packages.map(pkg => `
+          <option value="${pkg.id}">${pkg.name}</option>
+        `).join('')}
+      `;
+
+      // Update area dropdown
+      const areaSelect = document.getElementById('chooseArea');
+      areaSelect.innerHTML = `
+        <option value="" selected disabled>Select your preferred area</option>
+        ${city.packages[0].areas.map(area => `
+          <option value="${area.toLowerCase().replace(/\s+/g, '-')}">${area}</option>
+        `).join('')}
+      `;
+
+      // Reinitialize event listeners
+      initializeEventListeners();
+      updatePackageCount();
+    }
+  </script>
+
+  <style>
+    .filter-stats {
+      margin-bottom: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .main-button.secondary {
+      background-color: #f5f5f5;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    .main-button.secondary:hover {
+      background-color: #e0e0e0;
+    }
+
+    .filter-item {
+      margin-bottom: 15px;
+    }
+
+    .filter-item label {
+      display: block;
+      margin-bottom: 5px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .form-select, .form-control {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+
+    .form-select:focus, .form-control:focus {
+      border-color: #f35525;
+      box-shadow: 0 0 0 0.2rem rgba(243, 85, 37, 0.25);
+      outline: none;
+    }
+  </style>
+
+  </body>
+
+</html>
