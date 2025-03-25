@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Manage Customers - Admin Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="../assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #f35525;
+            --secondary-color: #1e1e1e;
+            --accent-color: #ffc107;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+        }
+
+        .admin-sidebar {
+            background-color: var(--primary-color);
+            min-height: 100vh;
+            padding: 20px 0;
+            position: fixed;
+            width: 250px;
+            box-shadow: 2px 0 5px rgba(34, 179, 193, 0.2);
+        }
+
+        .admin-sidebar .logo {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .admin-sidebar .logo img {
+            max-width: 150px;
+        }
+
+        .admin-sidebar .nav {
+            padding: 20px 0;
+        }
+
+        .admin-sidebar .nav-item {
+            margin: 5px 0;
+        }
+
+        .admin-sidebar .nav-link {
+            color: #fff;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .admin-sidebar .nav-link:hover,
+        .admin-sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .admin-sidebar .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .admin-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .admin-header {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h2 {
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
+        .admin-header .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .admin-header .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .customers-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .customers-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .add-customer-btn {
+            background-color: var(--success-color);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .add-customer-btn:hover {
+            opacity: 0.9;
+        }
+
+        .filters-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--light-bg);
+            border-radius: 5px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-item label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .filter-item select,
+        .filter-item input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .customers-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .customers-table th,
+        .customers-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .customers-table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+        }
+
+        .customers-table tr:hover {
+            background-color: var(--light-bg);
+        }
+
+        .customer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.active { background-color: rgba(40, 167, 69, 0.1); color: var(--success-color); }
+        .status-badge.inactive { background-color: rgba(220, 53, 69, 0.1); color: var(--danger-color); }
+        .status-badge.pending { background-color: rgba(255, 193, 7, 0.1); color: var(--accent-color); }
+
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            margin-right: 5px;
+        }
+
+        .action-btn.view { background-color: var(--info-color); color: #fff; }
+        .action-btn.edit { background-color: var(--accent-color); color: #fff; }
+        .action-btn.delete { background-color: var(--danger-color); color: #fff; }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button.active {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .pagination button:hover:not(.active) {
+            background-color: var(--light-bg);
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                width: 100%;
+                min-height: auto;
+                position: relative;
+            }
+
+            .admin-content {
+                margin-left: 0;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .filter-item {
+                width: 100%;
+            }
+
+            .customers-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .form-section h3 {
+            color: var(--secondary-color);
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .btn-save {
+            background-color: var(--success-color);
+            color: #fff;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            background-color: var(--light-bg);
+            overflow: hidden;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Sidebar -->
+    <div class="admin-sidebar">
+        <div class="logo">
+            <img src="../assets/images/logo.png" alt="Travel Booking">
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="admin.html">
+                    <i class="fa fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="bookings.html">
+                    <i class="fa fa-calendar"></i> Bookings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="destinations.html">
+                    <i class="fa fa-map-marker"></i> Destinations
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="deals.html">
+                    <i class="fa fa-tag"></i> Deals
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="hotels.html">
+                    <i class="fa fa-hotel"></i> Hotels
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="customers.html">
+                    <i class="fa fa-users"></i> Customers
+                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="settings.html">
+                    <i class="fa fa-cog"></i> Settings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../index.html">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+        <!-- Admin Header -->
+        <div class="admin-header">
+            <h2>Manage Customers</h2>
+            <div class="user-info">
+                <img src="../assets/images/admin-avatar.jpg" alt="Admin">
+                <span>Admin User</span>
+            </div>
+        </div>
+
+        <!-- Customers Container -->
+        <div class="customers-container">
+            <div class="customers-header">
+                <button class="add-customer-btn">
+                    <i class="fa fa-plus"></i> Add New Customer
+                </button>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <div class="filter-item">
+                        <label>Status</label>
+                        <select id="statusFilter">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label>Registration Date</label>
+                        <input type="date" id="dateFilter">
+                    </div>
+                    <div class="filter-item">
+                        <label>Search</label>
+                        <input type="text" id="searchFilter" placeholder="Search by name or email...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers Table -->
+            <table class="customers-table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Registration Date</th>
+                        <th>Total Bookings</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <img src="../assets/images/customers/customer1.jpg" alt="Customer 1" class="customer-avatar">
+                                <span>John Doe</span>
+                            </div>
+                        </td>
+                        <td>john.doe@example.com</td>
+                        <td>+91 98765 43210</td>
+                        <td>2024-01-15</td>
+                        <td>5</td>
+                        <td><span class="status-badge active">Active</span></td>
+                        <td>
+                            <button class="action-btn view">View</button>
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <img src="../assets/images/customers/customer2.jpg" alt="Customer 2" class="customer-avatar">
+                                <span>Jane Smith</span>
+                            </div>
+                        </td>
+                        <td>jane.smith@example.com</td>
+                        <td>+91 98765 43211</td>
+                        <td>2024-02-01</td>
+                        <td>3</td>
+                        <td><span class="status-badge pending">Pending</span></td>
+                        <td>
+                            <button class="action-btn view">View</button>
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <img src="../assets/images/customers/customer3.jpg" alt="Customer 3" class="customer-avatar">
+                                <span>Mike Johnson</span>
+                            </div>
+                        </td>
+                        <td>mike.johnson@example.com</td>
+                        <td>+91 98765 43212</td>
+                        <td>2024-02-15</td>
+                        <td>0</td>
+                        <td><span class="status-badge inactive">Inactive</span></td>
+                        <td>
+                            <button class="action-btn view">View</button>
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button>Previous</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Customer Modal -->
+    <div id="addCustomerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add New Customer</h2>
+            
+            <form id="addCustomerForm">
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h3>Basic Information</h3>
+                    <div class="form-group">
+                        <label for="customerImage">Profile Picture</label>
+                        <input type="file" id="customerImage" class="form-control" accept="image/*" required>
+                        <div class="image-preview">
+                            <img id="imagePreview" src="" alt="Preview" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Information -->
+                <div class="form-section">
+                    <h3>Address Information</h3>
+                    <div class="form-group">
+                        <label for="address">Street Address</label>
+                        <input type="text" id="address" class="form-control" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">PIN Code</label>
+                            <input type="text" id="pincode" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="form-section">
+                    <h3>Additional Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dateOfBirth">Date of Birth</label>
+                            <input type="date" id="dateOfBirth" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" class="form-control" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferences">Travel Preferences</label>
+                        <textarea id="preferences" class="form-control" placeholder="Enter travel preferences, interests, or special requirements"></textarea>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-save">Save Customer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/isotope.min.js"></script>
+    <script src="../assets/js/owl-carousel.js"></script>
+    <script src="../assets/js/wow.js"></script>
+    <script src="../assets/js/tabs.js"></script>
+    <script src="../assets/js/popup.js"></script>
+    <script src="../assets/js/custom.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle sidebar navigation
+            const navLinks = document.querySelectorAll('.admin-sidebar .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Handle add customer button
+            const addCustomerBtn = document.querySelector('.add-customer-btn');
+            const modal = document.getElementById('addCustomerModal');
+            const closeModal = document.querySelector('.close-modal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const customerImage = document.getElementById('customerImage');
+            const imagePreview = document.getElementById('imagePreview');
+
+            // Show modal
+            addCustomerBtn.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
+
+            // Close modal
+            function closeModalFunction() {
+                modal.style.display = 'none';
+                document.getElementById('addCustomerForm').reset();
+                imagePreview.style.display = 'none';
+            }
+
+            closeModal.addEventListener('click', closeModalFunction);
+            cancelBtn.addEventListener('click', closeModalFunction);
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModalFunction();
+                }
+            });
+
+            // Image preview
+            customerImage.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Form submission
+            document.getElementById('addCustomerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate password match
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+
+                // Collect form data
+                const formData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    password: password,
+                    address: {
+                        street: document.getElementById('address').value,
+                        city: document.getElementById('city').value,
+                        state: document.getElementById('state').value,
+                        country: document.getElementById('country').value,
+                        pincode: document.getElementById('pincode').value
+                    },
+                    dateOfBirth: document.getElementById('dateOfBirth').value,
+                    gender: document.getElementById('gender').value,
+                    preferences: document.getElementById('preferences').value,
+                    profileImage: imagePreview.src
+                };
+
+                // Here you would typically send the data to your backend
+                console.log('Form Data:', formData);
+                alert('Customer added successfully!');
+                closeModalFunction();
+            });
+
+            // Handle filters
+            const filters = document.querySelectorAll('.filter-item select, .filter-item input');
+            filters.forEach(filter => {
+                filter.addEventListener('change', function() {
+                    // Add your filter logic here
+                    console.log('Filter changed:', this.id, this.value);
+                });
+            });
+
+            // Handle action buttons
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.classList[1];
+                    const customerName = this.closest('tr').querySelector('td:first-child span:last-child').textContent;
+                    
+                    switch(action) {
+                        case 'view':
+                            alert(`Viewing customer: ${customerName}`);
+                            break;
+                        case 'edit':
+                            alert(`Editing customer: ${customerName}`);
+                            break;
+                        case 'delete':
+                            if(confirm(`Are you sure you want to delete ${customerName}?`)) {
+                                alert(`${customerName} deleted`);
+                            }
+                            break;
+                    }
+                });
+            });
+
+            // Handle pagination
+            const paginationButtons = document.querySelectorAll('.pagination button');
+            paginationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    paginationButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    // Add your pagination logic here
+                    console.log('Page changed:', this.textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

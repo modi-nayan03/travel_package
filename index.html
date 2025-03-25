@@ -52,16 +52,21 @@ https://templatemo.com/tm-580-woox-travel
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
-                            <img src="assets/images/logo.png" alt="">
+                            <img src="assets/images/logo.png" alt="Travel Booking">
                         </a>
                         <!-- ***** Logo End ***** -->
+
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                        <li><a href="index.html" class="active">Home</a></li>
-                            <li><a href="about.html">About</a></li>
+                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="destinations.html">Destinations</a></li>
+                            <li><a href="packages.html">Packages</a></li>
                             <li><a href="deals.html">Deals</a></li>
                             <li><a href="reservation.html">Reservation</a></li>
-                            <li><a href="reservation.html">Book Yours</a></li>
+                            <li class="auth-buttons">
+                                <a href="login.html" class="btn-auth" id="authBtn">Login / Register</a>
+                                <a href="#" class="btn-logout" id="logoutBtn" style="display: none;">Logout</a>
+                            </li>
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -1072,6 +1077,89 @@ https://templatemo.com/tm-580-woox-travel
             bannerTimer = setInterval(bannerSwitcher, 5000)
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const authBtn = document.getElementById('authBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            // Check login status
+            function checkLoginStatus() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                
+                if (isLoggedIn) {
+                    authBtn.style.display = 'none';
+                    logoutBtn.style.display = 'inline-block';
+                } else {
+                    authBtn.style.display = 'inline-block';
+                    logoutBtn.style.display = 'none';
+                }
+            }
+
+            // Handle logout
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                window.location.reload();
+            });
+
+            // Initial check
+            checkLoginStatus();
+        });
+    </script>
+
+    <style>
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-auth {
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-auth:hover {
+            background-color: #1a9ba7;
+            transform: translateY(-1px);
+        }
+
+        .btn-logout {
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+
+        .btn-logout:hover {
+            background-color: var(--danger-color);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-auth,
+            .btn-logout {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 
 </body>
 

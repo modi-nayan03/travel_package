@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Packages - Travel Booking</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <style>
+        .packages-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/packages-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .packages-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .packages-header p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .package-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .package-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .package-card:hover .package-image img {
+            transform: scale(1.1);
+        }
+
+        .package-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .package-content {
+            padding: 25px;
+        }
+
+        .package-content h3 {
+            color: #1f5582;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .package-content p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .package-features {
+            margin-bottom: 20px;
+        }
+
+        .package-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .package-feature i {
+            color: #1f5582;
+        }
+
+        .package-price {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .price-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+
+        .price-duration {
+            color: #666;
+        }
+
+        .btn-book {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #1f5582;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-book:hover {
+            background: #ff6b6b;
+            transform: translateY(-2px);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-auth {
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-auth:hover {
+            background-color: #1a9ba7;
+            transform: translateY(-1px);
+        }
+
+        .btn-logout {
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+
+        .btn-logout:hover {
+            background-color: var(--danger-color);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-auth,
+            .btn-logout {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Area Start -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- Logo Start -->
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.png" alt="Travel Booking">
+                        </a>
+                        <!-- Logo End -->
+
+                        <!-- Menu Start -->
+                        <ul class="nav">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="destinations.html">Destinations</a></li>
+                            <li><a href="packages.html" class="active">Packages</a></li>
+                            <li><a href="deals.html">Deals</a></li>
+                            <li><a href="reservation.html">Reservation</a></li>
+                            <li class="auth-buttons">
+                                <a href="login.html" class="btn-auth">Login / Register</a>
+                                <a href="#" class="btn-logout" style="display: none;">Logout</a>
+                            </li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- Menu End -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header Area End -->
+
+    <!-- Packages Header -->
+    <div class="packages-header">
+        <div class="container">
+            <h1>Travel Packages</h1>
+            <p>Choose from our carefully curated travel packages for the perfect vacation</p>
+        </div>
+    </div>
+
+    <!-- Packages Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Royal Rajasthan Package -->
+            <div class="col-lg-4 col-md-6">
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8amFpcHVyfGVufDB8fDB8fHww" alt="Rajasthan Package">
+                        <span class="package-badge">Popular</span>
+                    </div>
+                    <div class="package-content">
+                        <h3>Royal Rajasthan Tour</h3>
+                        <p>Experience the grandeur of Rajasthan with visits to Jaipur, Udaipur, and Jodhpur.</p>
+                        <div class="package-features">
+                            <div class="package-feature">
+                                <i class="fa fa-clock"></i>
+                                <span>5 Days / 4 Nights</span>
+                            </div>
+                            <div class="package-feature">
+                                <i class="fa fa-map-marker"></i>
+                                <span>3 Cities</span>
+                            </div>
+                            <div class="package-feature">
+                                <i class="fa fa-hotel"></i>
+                                <span>Luxury Hotels</span>
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-amount">₹45,000</span>
+                            <span class="price-duration">per person</span>
+                        </div>
+                        <a href="reservation.html" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Taj Mahal Package -->
+            <div class="col-lg-4 col-md-6">
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Taj Mahal Package">
+                        <span class="package-badge">Best Seller</span>
+                    </div>
+                    <div class="package-content">
+                        <h3>Taj Mahal & Agra Fort</h3>
+                        <p>Visit the iconic Taj Mahal and explore the historic Agra Fort.</p>
+                        <div class="package-features">
+                            <div class="package-feature">
+                                <i class="fa fa-clock"></i>
+                                <span>3 Days / 2 Nights</span>
+                            </div>
+                            <div class="package-feature">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Agra City</span>
+                            </div>
+                            <div class="package-feature">
+                                <i class="fa fa-hotel"></i>
+                                <span>Premium Hotels</span>
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-amount">₹25,000</span>
+                            <span class="price-duration">per person</span>
+                        </div>
+                        <a href="reservation.html" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kerala Backwaters Package -->
+            <div class="col-lg-4 col-md-6">
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Kerala Package">
+                        <span class="package-badge">Exclusive</span>
+                    </div>
+                    <div class="package-content">
+                        <h3>Kerala Backwaters</h3>
+                        <p>Experience the serene backwaters and lush greenery of Kerala.</p>
+                        <div class="package-features">
+                            <div class="package-feature">
+                                <i class="fa fa-clock"></i>
+                                <span>4 Days / 3 Nights</span>
+                            </div>
+                            <div class="package-feature">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Alleppey & Kochi</span>
+                            </div>
+                            <div class="package-feature">
+                                <i class="fa fa-hotel"></i>
+                                <span>Houseboat Stay</span>
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-amount">₹35,000</span>
+                            <span class="price-duration">per person</span>
+                        </div>
+                        <a href="reservation.html" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const authBtn = document.querySelector('.btn-auth');
+            const logoutBtn = document.querySelector('.btn-logout');
+            
+            // Check login status
+            function checkLoginStatus() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                
+                if (isLoggedIn) {
+                    authBtn.style.display = 'none';
+                    logoutBtn.style.display = 'inline-block';
+                } else {
+                    authBtn.style.display = 'inline-block';
+                    logoutBtn.style.display = 'none';
+                }
+            }
+
+            // Handle logout
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                window.location.reload();
+            });
+
+            // Initial check
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html> 

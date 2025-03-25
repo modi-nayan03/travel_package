@@ -49,17 +49,22 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
-              <img src="assets/images/logo.png" alt="MakeMyTrip">
+                        <img src="assets/images/logo.png" alt="Travel Booking">
                     </a>
                     <!-- ***** Logo End ***** -->
+
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="packages.html">Packages</a></li>
                         <li><a href="deals.html">Deals</a></li>
                         <li><a href="reservation.html" class="active">Reservation</a></li>
-                        <li><a href="reservation.html">Book Yours</a></li>
-                    </ul>   
+                        <li class="auth-buttons">
+                            <a href="login.html" class="btn-auth">Login / Register</a>
+                            <a href="#" class="btn-logout" style="display: none;">Logout</a>
+                        </li>
+                    </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -709,671 +714,66 @@
         const pricePerPersonSpan = section.querySelector('#pricePerPerson');
         const totalPriceSpan = section.querySelector('#totalPrice');
         if (pricePerPersonSpan) {
-          pricePerPersonSpan.textContent = `₹${basePrice.toLocaleString()}`;
+          pricePerPersonSpan.textContent = '₹' + basePrice.toLocaleString();
         }
         if (totalPriceSpan) {
-          totalPriceSpan.textContent = `₹${totalPrice.toLocaleString()}`;
+          totalPriceSpan.textContent = '₹' + totalPrice.toLocaleString();
         }
       });
     }
 
-    // Add event listeners for price calculation
-    document.getElementById('packageType').addEventListener('change', calculatePrice);
-    document.getElementById('chooseGuests').addEventListener('change', calculatePrice);
-
-    // Update submitForm function to include price
+    // Add form submission handling
     function submitForm() {
-      // Get form values
-      var packageType = document.getElementById('packageType').value;
-      var Area = document.getElementById('chooseArea').value;
-      var checkIn = document.getElementById('checkIn').value;
-      var checkOut = document.getElementById('checkOut').value;
-      var Guests = document.getElementById('chooseGuests').value;
-      var totalPrice = document.getElementById('totalPrice').textContent;
-
-      // Calculate the number of days for the trip
-      var checkInDate = new Date(checkIn);
-      var checkOutDate = new Date(checkOut);
-      var tripDays = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
-
-      // Construct URL parameters
-      var urlParams = `?packageType=${packageType}&Area=${Area}&checkIn=${checkIn}&checkOut=${checkOut}&Guests=${Guests}&tripDays=${tripDays}&totalPrice=${totalPrice}`;
-
-      // Redirect to travel-plan.html with URL parameters
-      window.location.href = 'travel-plan.html' + urlParams;
-
-      // Prevent the form from actually submitting
+      // Get form data
+      const formData = new FormData(document.getElementById('reservation-form'));
+      const data = Object.fromEntries(formData.entries());
+      
+      // Validate dates
+      const checkIn = new Date(data.checkIn);
+      const checkOut = new Date(data.checkOut);
+      
+      if (checkIn > checkOut) {
+        alert('Check-out date must be after check-in date');
+        return false;
+      }
+      
+      // Here you would typically send the data to your server
+      console.log('Form submitted:', data);
+      
+      // Show success message
+      alert('Reservation submitted successfully! We will contact you shortly.');
       return false;
     }
 
-    // Add to your existing JavaScript
-    document.getElementById('citySelect').addEventListener('change', function() {
-      const selectedCity = this.value;
-      
-      // Update page content based on selected city
-      if (selectedCity !== 'all') {
-        // Update URL parameter
-        const newUrl = new URL(window.location);
-        newUrl.searchParams.set('city', selectedCity);
-        window.history.pushState({}, '', newUrl);
-        
-        // Update page content
-        updatePageContent(selectedCity);
-      } else {
-        // Show all packages
-        const newUrl = new URL(window.location);
-        newUrl.searchParams.delete('city');
-        window.history.pushState({}, '', newUrl);
-        
-        // Show all cities' packages
-        showAllPackages();
-      }
-    });
-
-    // Function to show all packages from all cities
-    function showAllPackages() {
-      const packageCardsContainer = document.getElementById('packageCards');
-      packageCardsContainer.innerHTML = Object.values(cityPackages)
-        .flatMap(cityInfo => cityInfo.packages)
-        .map(pkg => `
-          <div class="col-lg-4 col-md-6">
-            <div class="package-card" data-duration="${pkg.duration.split(' ')[0]}" 
-                 data-activities="${pkg.activities.join(',')}">
-              <img src="${pkg.image}" alt="${pkg.name}">
-              <div class="package-info">
-                <h4>${pkg.name}</h4>
-                <p>${pkg.description}</p>
-                <div class="price">From ₹${pkg.price.toLocaleString()}</div>
-                <button class="tab-button" data-package="${pkg.id}">Select Package</button>
-              </div>
-            </div>
-          </div>
-        `).join('');
-        
-      // Update package count
-      document.getElementById('packageCount').textContent = 
-        `Showing all packages from all cities`;
-        
-      // Reinitialize event listeners
-      initializeEventListeners();
-    }
-
-    // Add this city packages data structure
-    const cityPackages = {
-      agra: {
-        name: "Agra",
-        title: "Your Taj Mahal Experience Awaits!",
-        description: "Experience the grandeur of the Taj Mahal and Mughal architecture",
-        packages: [
-          {
-            id: "taj-special",
-            name: "Taj Special Package",
-            image: "assets/images/destinations/agra-taj.jpg",
-            description: "Visit the iconic Taj Mahal and explore Mughal heritage",
-            price: 25000,
-            duration: "3 Days / 2 Nights",
-            activities: ["sightseeing", "heritage"],
-            areas: ["Taj Ganj", "Fatehpur Sikri", "Agra Fort"],
-            inclusions: [
-              "Luxury Hotel Stay (5 Star)",
-              "Taj Mahal Visit with Guide",
-              "Agra Fort Tour",
-              "Fatehpur Sikri Excursion",
-              "Traditional Mughlai Dinner"
-            ]
-          },
-          {
-            id: "heritage-tour",
-            name: "Heritage Tour Package",
-            image: "assets/images/destinations/agra-heritage.jpg",
-            description: "Explore the rich heritage of Agra",
-            price: 20000,
-            duration: "4 Days / 3 Nights",
-            activities: ["heritage", "cultural"],
-            areas: ["Old Agra", "Mehtab Bagh", "Itmad-ud-Daulah"],
-            inclusions: [
-              "Heritage Hotel Stay",
-              "All Major Monuments",
-              "Cultural Show",
-              "Local Market Tour",
-              "Traditional Dinner"
-            ]
-          }
-        ]
-      },
-      jaipur: {
-        name: "Jaipur",
-        title: "Your Pink City Adventure Awaits!",
-        description: "Discover the royal heritage and cultural charm of Jaipur",
-        packages: [
-          {
-            id: "palace-tour",
-            name: "Royal Palace Tour",
-            image: "assets/images/destinations/jaipur-palace.jpg",
-            description: "Experience the royal heritage of Rajasthan",
-            price: 30000,
-            duration: "4 Days / 3 Nights",
-            activities: ["heritage", "cultural"],
-            areas: ["City Palace", "Amber Fort", "Hawa Mahal"],
-            inclusions: [
-              "Luxury Palace Hotel Stay",
-              "City Palace Tour",
-              "Amber Fort Visit",
-              "Elephant Ride",
-              "Royal Rajasthani Dinner"
-            ]
-          },
-          {
-            id: "cultural-tour",
-            name: "Cultural Experience",
-            image: "assets/images/destinations/jaipur-culture.jpg",
-            description: "Immerse yourself in Rajasthani culture",
-            price: 22000,
-            duration: "3 Days / 2 Nights",
-            activities: ["cultural", "shopping"],
-            areas: ["Old City", "Sanganer", "Nahargarh"],
-            inclusions: [
-              "Heritage Haveli Stay",
-              "Local Craft Workshops",
-              "Traditional Dance Show",
-              "Bazaar Tour",
-              "Cooking Class"
-            ]
-          }
-        ]
-      },
-      goa: {
-        name: "Goa",
-        title: "Your Beach Paradise Awaits!",
-        description: "Experience the perfect blend of beaches, culture, and nightlife",
-        packages: [
-          {
-            id: "beach-bliss",
-            name: "Beach Bliss Package",
-            image: "assets/images/destinations/goa-beach.jpg",
-            description: "Sun, sand, and sea! Perfect beach vacation",
-            price: 25000,
-            duration: "5 Days / 4 Nights",
-            activities: ["beach", "water-sports"],
-            areas: ["North Goa", "South Goa", "Panjim"],
-            inclusions: [
-              "Beachfront Resort Stay",
-              "Water Sports Activities",
-              "Beach BBQ Dinner",
-              "Sunset Cruise",
-              "Airport Transfers"
-            ]
-          },
-          {
-            id: "heritage-trail",
-            name: "Heritage Trail Package",
-            image: "assets/images/destinations/goa-heritage.jpg",
-            description: "Discover Goa's rich Portuguese heritage",
-            price: 20000,
-            duration: "4 Days / 3 Nights",
-            activities: ["heritage", "cultural"],
-            areas: ["Old Goa", "Fontainhas", "Panjim"],
-            inclusions: [
-              "Heritage Hotel Stay",
-              "Church Tours",
-              "Spice Plantation Visit",
-              "Local Food Trail",
-              "Cultural Show"
-            ]
-          }
-        ]
-      },
-      kerala: {
-        name: "Kerala",
-        title: "Your God's Own Country Awaits!",
-        description: "Experience the serene backwaters and lush greenery of Kerala",
-        packages: [
-          {
-            id: "backwater-bliss",
-            name: "Backwater Bliss Package",
-            image: "assets/images/destinations/kerala-backwaters.jpg",
-            description: "Cruise through serene backwaters and experience traditional houseboat stay",
-            price: 35000,
-            duration: "5 Days / 4 Nights",
-            activities: ["backwater", "cultural"],
-            areas: ["Alleppey", "Kumarakom", "Kochi"],
-            inclusions: [
-              "Luxury Houseboat Stay",
-              "Backwater Cruise",
-              "Traditional Kathakali Show",
-              "Ayurvedic Treatment",
-              "Local Village Tour"
-            ]
-          },
-          {
-            id: "hill-station",
-            name: "Hill Station Retreat",
-            image: "assets/images/destinations/kerala-hills.jpg",
-            description: "Explore the misty hills and tea plantations of Munnar",
-            price: 28000,
-            duration: "4 Days / 3 Nights",
-            activities: ["nature", "adventure"],
-            areas: ["Munnar", "Thekkady", "Vagamon"],
-            inclusions: [
-              "Hill Resort Stay",
-              "Tea Plantation Visit",
-              "Wildlife Safari",
-              "Spice Garden Tour",
-              "Trekking Experience"
-            ]
-          }
-        ]
-      },
-      mumbai: {
-        name: "Mumbai",
-        title: "Your City of Dreams Awaits!",
-        description: "Experience the vibrant culture and modern charm of Mumbai",
-        packages: [
-          {
-            id: "city-explorer",
-            name: "City Explorer Package",
-            image: "assets/images/destinations/mumbai-city.jpg",
-            description: "Discover the heart of Mumbai with its iconic landmarks",
-            price: 25000,
-            duration: "4 Days / 3 Nights",
-            activities: ["sightseeing", "cultural"],
-            areas: ["South Mumbai", "Bandra", "Juhu"],
-            inclusions: [
-              "Luxury Hotel Stay",
-              "Gateway of India Tour",
-              "Elephanta Caves Visit",
-              "Bollywood Studio Tour",
-              "Local Street Food Tour"
-            ]
-          },
-          {
-            id: "heritage-walk",
-            name: "Heritage Walk Package",
-            image: "assets/images/destinations/mumbai-heritage.jpg",
-            description: "Explore the colonial heritage and architectural marvels",
-            price: 22000,
-            duration: "3 Days / 2 Nights",
-            activities: ["heritage", "cultural"],
-            areas: ["Fort Area", "Colaba", "Crawford Market"],
-            inclusions: [
-              "Heritage Hotel Stay",
-              "Colonial Architecture Tour",
-              "Art Deco District Walk",
-              "Local Market Visit",
-              "Traditional Dinner"
-            ]
-          }
-        ]
-      },
-      delhi: {
-        name: "Delhi",
-        title: "Your Capital City Experience Awaits!",
-        description: "Discover the perfect blend of history and modernity in India's capital",
-        packages: [
-          {
-            id: "heritage-delhi",
-            name: "Heritage Delhi Package",
-            image: "assets/images/destinations/delhi-heritage.jpg",
-            description: "Explore the rich history and architectural marvels of Delhi",
-            price: 20000,
-            duration: "4 Days / 3 Nights",
-            activities: ["heritage", "cultural"],
-            areas: ["Old Delhi", "New Delhi", "South Delhi"],
-            inclusions: [
-              "Heritage Hotel Stay",
-              "Red Fort Tour",
-              "Qutub Minar Visit",
-              "Humayun's Tomb",
-              "Old Delhi Food Walk"
-            ]
-          },
-          {
-            id: "modern-delhi",
-            name: "Modern Delhi Experience",
-            image: "assets/images/destinations/delhi-modern.jpg",
-            description: "Experience the contemporary charm of India's capital",
-            price: 25000,
-            duration: "3 Days / 2 Nights",
-            activities: ["shopping", "cultural"],
-            areas: ["Connaught Place", "Karol Bagh", "South Delhi"],
-            inclusions: [
-              "Luxury Hotel Stay",
-              "Shopping Tour",
-              "Art Gallery Visit",
-              "Fine Dining Experience",
-              "Night Market Tour"
-            ]
-          }
-        ]
-      },
-      udaipur: {
-        name: "Udaipur",
-        title: "Your Lake City Paradise Awaits!",
-        description: "Experience the royal charm and serene lakes of Udaipur",
-        packages: [
-          {
-            id: "lake-palace",
-            name: "Lake Palace Experience",
-            image: "assets/images/destinations/udaipur-lake.jpg",
-            description: "Stay by the lakes and experience royal heritage",
-            price: 30000,
-            duration: "4 Days / 3 Nights",
-            activities: ["heritage", "cultural"],
-            areas: ["Lake Pichola", "City Palace", "Fateh Sagar"],
-            inclusions: [
-              "Lake View Hotel Stay",
-              "City Palace Tour",
-              "Lake Pichola Cruise",
-              "Cultural Show",
-              "Traditional Dinner"
-            ]
-          },
-          {
-            id: "heritage-udaipur",
-            name: "Heritage Trail Package",
-            image: "assets/images/destinations/udaipur-heritage.jpg",
-            description: "Explore the rich heritage and architecture",
-            price: 25000,
-            duration: "3 Days / 2 Nights",
-            activities: ["heritage", "cultural"],
-            areas: ["Old City", "Monsoon Palace", "Saheliyon Ki Bari"],
-            inclusions: [
-              "Heritage Hotel Stay",
-              "Palace Tour",
-              "Garden Visit",
-              "Art Workshop",
-              "Local Market Tour"
-            ]
-          }
-        ]
-      },
-      rishikesh: {
-        name: "Rishikesh",
-        title: "Your Spiritual Adventure Awaits!",
-        description: "Experience the perfect blend of spirituality and adventure",
-        packages: [
-          {
-            id: "spiritual-retreat",
-            name: "Spiritual Retreat Package",
-            image: "assets/images/destinations/rishikesh-spiritual.jpg",
-            description: "Immerse yourself in yoga and meditation",
-            price: 18000,
-            duration: "5 Days / 4 Nights",
-            activities: ["spiritual", "wellness"],
-            areas: ["Laxman Jhula", "Ram Jhula", "Ashrams"],
-            inclusions: [
-              "Ashram Stay",
-              "Daily Yoga Classes",
-              "Meditation Sessions",
-              "Ganga Aarti",
-              "Temple Visits"
-            ]
-          },
-          {
-            id: "adventure-rishikesh",
-            name: "Adventure Thrills Package",
-            image: "assets/images/destinations/rishikesh-adventure.jpg",
-            description: "Experience thrilling adventure activities",
-            price: 22000,
-            duration: "4 Days / 3 Nights",
-            activities: ["adventure", "nature"],
-            areas: ["River Rafting Zone", "Neelkanth", "Kaudiyala"],
-            inclusions: [
-              "Riverside Camp Stay",
-              "River Rafting",
-              "Bungee Jumping",
-              "Rock Climbing",
-              "Camping Experience"
-            ]
-          }
-        ]
-      }
-    };
-
-    // Add this function to update page content based on selected city
-    function updatePageContent(cityId) {
-      const city = cityPackages[cityId];
-      if (!city) return;
-
-      // Update page title and description
-      document.querySelector('.second-page-heading h4').textContent = city.title;
-      document.querySelector('.second-page-heading h2').textContent = `Complete Your ${city.name} Reservation`;
-      document.querySelector('.second-page-heading p').textContent = city.description;
-
-      // Update package cards
-      const packageCardsContainer = document.getElementById('packageCards');
-      packageCardsContainer.innerHTML = city.packages.map(pkg => `
-        <div class="col-lg-3 col-md-6">
-          <div class="package-card" data-duration="${pkg.duration.split(' ')[0]}" 
-               data-activities="${pkg.activities.join(',')}" data-city="${cityId}">
-            <img src="${pkg.image}" alt="${pkg.name}">
-            <div class="package-info">
-              <h4>${pkg.name}</h4>
-              <p>${pkg.description}</p>
-              <div class="price">From ₹${pkg.price.toLocaleString()}</div>
-              <button class="tab-button" data-package="${pkg.id}">Select Package</button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-
-      // Update package type dropdown
-      const packageSelect = document.getElementById('packageType');
-      packageSelect.innerHTML = `
-        <option value="" selected disabled>Choose your preferred package</option>
-        ${city.packages.map(pkg => `
-          <option value="${pkg.id}">${pkg.name}</option>
-        `).join('')}
-      `;
-
-      // Update area dropdown
-      const areaSelect = document.getElementById('chooseArea');
-      areaSelect.innerHTML = `
-        <option value="" selected disabled>Select your preferred area</option>
-        ${city.packages[0].areas.map(area => `
-          <option value="${area.toLowerCase().replace(/\s+/g, '-')}">${area}</option>
-        `).join('')}
-      `;
-
-      // Reinitialize event listeners
-      initializeEventListeners();
-      updatePackageCount();
-    }
-
-    // Function to update package details in reservation form
-    function updateReservationForm(packageId, cityId) {
-      const city = cityPackages[cityId];
-      if (!city) return;
-
-      const package = city.packages.find(pkg => pkg.id === packageId);
-      if (!package) return;
-
-      // Update package details section
-      const packageDetailsContent = document.getElementById('packageDetailsContent');
-      packageDetailsContent.innerHTML = `
-        <div class="package-info" id="${packageId}-details">
-          <h5>${package.name} Inclusions:</h5>
-          <ul>
-            ${package.inclusions.map(inclusion => `
-              <li><i class="fa fa-check"></i> ${inclusion}</li>
-            `).join('')}
-          </ul>
-          <div class="package-price">
-            <h5>Package Price:</h5>
-            <p class="price">Total Price: <span id="totalPrice">₹${package.price.toLocaleString()}</span></p>
-            <p class="price-breakdown">Price per person: <span id="pricePerPerson">₹${package.price.toLocaleString()}</span></p>
-          </div>
-        </div>
-      `;
-
-      // Update package type dropdown
-      const packageType = document.getElementById('packageType');
-      packageType.value = packageId;
-
-      // Update area dropdown with package areas
-      const areaSelect = document.getElementById('chooseArea');
-      areaSelect.innerHTML = `
-        <option value="" selected disabled>Select your preferred area</option>
-        ${package.areas.map(area => `
-          <option value="${area.toLowerCase().replace(/\s+/g, '-')}">${area}</option>
-        `).join('')}
-      `;
-
-      // Update activities checkboxes based on package activities
-      const activitiesGrid = document.querySelector('.activities-grid');
-      activitiesGrid.innerHTML = package.activities.map(activity => `
-        <div class="activity-item">
-          <input type="checkbox" id="${activity}" name="activities" value="${activity}" checked>
-          <label for="${activity}">${activity.charAt(0).toUpperCase() + activity.slice(1)}</label>
-        </div>
-      `).join('');
-
-      // Show the reservation form section
-      document.querySelector('.reservation-form').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Update the package card click handler
-    function initializeEventListeners() {
-      const packageButtons = document.querySelectorAll('.package-card .tab-button');
-      packageButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const packageId = this.getAttribute('data-package');
-          const cityId = this.closest('.package-card').getAttribute('data-city');
-          const city = cityPackages[cityId];
-          if (city) {
-            document.getElementById('cityName').textContent = city.name;
-          }
-          updateReservationForm(packageId, cityId);
-        });
-      });
-    }
-
-    // Update the package type dropdown change handler
-    document.getElementById('packageType').addEventListener('change', function() {
-      const selectedCity = document.getElementById('citySelect').value;
-      if (selectedCity === 'all') {
-        document.getElementById('cityName').textContent = 'Travel';
-        return;
-      }
-      
-      const city = cityPackages[selectedCity];
-      if (!city) return;
-
-      document.getElementById('cityName').textContent = city.name;
-      const package = city.packages.find(pkg => pkg.id === this.value);
-      if (!package) return;
-
-      updateReservationForm(package.id, selectedCity);
-    });
-
-    // Add price calculation based on number of guests
-    document.getElementById('chooseGuests').addEventListener('change', function() {
-      const packageType = document.getElementById('packageType').value;
-      const selectedCity = document.getElementById('citySelect').value;
-      
-      if (!packageType || selectedCity === 'all') return;
-
-      const city = cityPackages[selectedCity];
-      const package = city.packages.find(pkg => pkg.id === packageType);
-      
-      if (!package) return;
-
-      const numGuests = parseInt(this.value) || 1;
-      const basePrice = package.price;
-      let totalPrice = basePrice * numGuests;
-
-      // Apply discount for 3+ guests
-      if (numGuests >= 3) {
-        totalPrice = totalPrice * 0.9; // 10% discount
-      }
-
-      // Update price displays
-      document.querySelectorAll('.package-info').forEach(section => {
-        const pricePerPersonSpan = section.querySelector('#pricePerPerson');
-        const totalPriceSpan = section.querySelector('#totalPrice');
-        if (pricePerPersonSpan) {
-          pricePerPersonSpan.textContent = `₹${basePrice.toLocaleString()}`;
-        }
-        if (totalPriceSpan) {
-          totalPriceSpan.textContent = `₹${totalPrice.toLocaleString()}`;
-        }
-      });
-    });
-
-    // Initialize event listeners when page loads
+    // Add authentication status check
     document.addEventListener('DOMContentLoaded', function() {
-      initializeEventListeners();
-      updatePackageCount();
-    });
-
-    // Add city select change handler to update form title
-    document.getElementById('citySelect').addEventListener('change', function() {
-      const selectedCity = this.value;
-      const cityNameElement = document.getElementById('cityName');
+      const authBtn = document.querySelector('.btn-auth');
+      const logoutBtn = document.querySelector('.btn-logout');
       
-      if (selectedCity === 'all') {
-        cityNameElement.textContent = 'Travel';
-        return;
+      // Check login status
+      function checkLoginStatus() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        
+        if (isLoggedIn) {
+          authBtn.style.display = 'none';
+          logoutBtn.style.display = 'inline-block';
+        } else {
+          authBtn.style.display = 'inline-block';
+          logoutBtn.style.display = 'none';
+        }
       }
 
-      const city = cityPackages[selectedCity];
-      if (!city) return;
+      // Handle logout
+      logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userData');
+        window.location.reload();
+      });
 
-      cityNameElement.textContent = city.name;
+      // Initial check
+      checkLoginStatus();
     });
   </script>
-
-  <style>
-    .filter-stats {
-      margin-bottom: 20px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .filter-buttons {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .main-button.secondary {
-      background-color: #f5f5f5;
-      color: #333;
-      border: 1px solid #ddd;
-    }
-
-    .main-button.secondary:hover {
-      background-color: #e0e0e0;
-    }
-
-    .filter-item {
-      margin-bottom: 15px;
-    }
-
-    .filter-item label {
-      display: block;
-      margin-bottom: 5px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .form-select, .form-control {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
-      color: #333;
-      transition: all 0.3s ease;
-    }
-
-    .form-select:focus, .form-control:focus {
-      border-color: #f35525;
-      box-shadow: 0 0 0 0.2rem rgba(243, 85, 37, 0.25);
-      outline: none;
-    }
-  </style>
-
-  </body>
-
+</body>
 </html>

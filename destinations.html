@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Destinations - Travel Booking</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <style>
+        .destinations-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/destinations-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .destinations-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .destinations-header p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .destination-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .destination-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .destination-card:hover .destination-image img {
+            transform: scale(1.1);
+        }
+
+        .destination-content {
+            padding: 25px;
+        }
+
+        .destination-content h3 {
+            color: #1f5582;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .destination-content p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .destination-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .destination-info span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .destination-info i {
+            color: #1f5582;
+        }
+
+        .btn-explore {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #1f5582;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-explore:hover {
+            background: #ff6b6b;
+            transform: translateY(-2px);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-auth {
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-auth:hover {
+            background-color: #1a9ba7;
+            transform: translateY(-1px);
+        }
+
+        .btn-logout {
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+
+        .btn-logout:hover {
+            background-color: var(--danger-color);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-auth,
+            .btn-logout {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Area Start -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- Logo Start -->
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.png" alt="Travel Booking">
+                        </a>
+                        <!-- Logo End -->
+
+                        <!-- Menu Start -->
+                        <ul class="nav">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="destinations.html" class="active">Destinations</a></li>
+                            <li><a href="packages.html">Packages</a></li>
+                            <li><a href="deals.html">Deals</a></li>
+                            <li><a href="reservation.html">Reservation</a></li>
+                            <li class="auth-buttons">
+                                <a href="login.html" class="btn-auth">Login / Register</a>
+                                <a href="#" class="btn-logout" style="display: none;">Logout</a>
+                            </li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- Menu End -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header Area End -->
+
+    <!-- Destinations Header -->
+    <div class="destinations-header">
+        <div class="container">
+            <h1>Explore Our Destinations</h1>
+            <p>Discover the most beautiful places in India with our curated collection of destinations</p>
+        </div>
+    </div>
+
+    <!-- Destinations Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Jaipur -->
+            <div class="col-lg-4 col-md-6">
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8amFpcHVyfGVufDB8fDB8fHww" alt="Jaipur">
+                    </div>
+                    <div class="destination-content">
+                        <h3>Jaipur</h3>
+                        <p>The Pink City of India, known for its stunning palaces, vibrant culture, and rich heritage.</p>
+                        <div class="destination-info">
+                            <span><i class="fa fa-user"></i> 3.1M People</span>
+                            <span><i class="fa fa-globe"></i> 484 km²</span>
+                            <span><i class="fa fa-home"></i> ₹22,000</span>
+                        </div>
+                        <a href="reservation.html" class="btn-explore">Explore Jaipur</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agra -->
+            <div class="col-lg-4 col-md-6">
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Agra">
+                    </div>
+                    <div class="destination-content">
+                        <h3>Agra</h3>
+                        <p>Home to the iconic Taj Mahal and other magnificent Mughal architecture.</p>
+                        <div class="destination-info">
+                            <span><i class="fa fa-user"></i> 2.2M People</span>
+                            <span><i class="fa fa-globe"></i> 188 km²</span>
+                            <span><i class="fa fa-home"></i> ₹25,000</span>
+                        </div>
+                        <a href="reservation.html" class="btn-explore">Explore Agra</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kerala -->
+            <div class="col-lg-4 col-md-6">
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Kerala">
+                    </div>
+                    <div class="destination-content">
+                        <h3>Kerala</h3>
+                        <p>God's Own Country, famous for its backwaters, beaches, and lush greenery.</p>
+                        <div class="destination-info">
+                            <span><i class="fa fa-user"></i> 35M People</span>
+                            <span><i class="fa fa-globe"></i> 38,863 km²</span>
+                            <span><i class="fa fa-home"></i> ₹30,000</span>
+                        </div>
+                        <a href="reservation.html" class="btn-explore">Explore Kerala</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const authBtn = document.querySelector('.btn-auth');
+            const logoutBtn = document.querySelector('.btn-logout');
+            
+            // Check login status
+            function checkLoginStatus() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                
+                if (isLoggedIn) {
+                    authBtn.style.display = 'none';
+                    logoutBtn.style.display = 'inline-block';
+                } else {
+                    authBtn.style.display = 'inline-block';
+                    logoutBtn.style.display = 'none';
+                }
+            }
+
+            // Handle logout
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                window.location.reload();
+            });
+
+            // Initial check
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html> 

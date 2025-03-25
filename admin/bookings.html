@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Manage Bookings - Admin Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="../assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #f35525;
+            --secondary-color: #1e1e1e;
+            --accent-color: #ffc107;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+        }
+
+        .admin-sidebar {
+            background-color: var(--primary-color);
+            min-height: 100vh;
+            padding: 20px 0;
+            position: fixed;
+            width: 250px;
+            box-shadow: 2px 0 5px rgba(34, 179, 193, 0.2);
+        }
+
+        .admin-sidebar .logo {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .admin-sidebar .logo img {
+            max-width: 150px;
+        }
+
+        .admin-sidebar .nav {
+            padding: 20px 0;
+        }
+
+        .admin-sidebar .nav-item {
+            margin: 5px 0;
+        }
+
+        .admin-sidebar .nav-link {
+            color: #fff;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .admin-sidebar .nav-link:hover,
+        .admin-sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .admin-sidebar .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .admin-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .admin-header {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h2 {
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
+        .admin-header .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .admin-header .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .bookings-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .filters-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--light-bg);
+            border-radius: 5px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-item label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .filter-item select,
+        .filter-item input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .bookings-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bookings-table th,
+        .bookings-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .bookings-table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+        }
+
+        .bookings-table tr:hover {
+            background-color: var(--light-bg);
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.pending { background-color: rgba(255, 193, 7, 0.1); color: var(--accent-color); }
+        .status-badge.confirmed { background-color: rgba(40, 167, 69, 0.1); color: var(--success-color); }
+        .status-badge.cancelled { background-color: rgba(220, 53, 69, 0.1); color: var(--danger-color); }
+
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            margin-right: 5px;
+        }
+
+        .action-btn.view { background-color: var(--info-color); color: #fff; }
+        .action-btn.edit { background-color: var(--accent-color); color: #fff; }
+        .action-btn.delete { background-color: var(--danger-color); color: #fff; }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button.active {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .pagination button:hover:not(.active) {
+            background-color: var(--light-bg);
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                width: 100%;
+                min-height: auto;
+                position: relative;
+            }
+
+            .admin-content {
+                margin-left: 0;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .filter-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Sidebar -->
+    <div class="admin-sidebar">
+        <div class="logo">
+            <img src="../assets/images/logo.png" alt="Travel Booking">
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="admin.html">
+                    <i class="fa fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="bookings.html">
+                    <i class="fa fa-calendar"></i> Bookings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="destinations.html">
+                    <i class="fa fa-map-marker"></i> Destinations
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="deals.html">
+                    <i class="fa fa-tag"></i> Deals
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="hotels.html">
+                    <i class="fa fa-hotel"></i> Hotels
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="customers.html">
+                    <i class="fa fa-users"></i> Customers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="settings.html">
+                    <i class="fa fa-cog"></i> Settings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../index.html">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+        <!-- Admin Header -->
+        <div class="admin-header">
+            <h2>Manage Bookings</h2>
+            <div class="user-info">
+                <img src="../assets/images/admin-avatar.jpg" alt="Admin">
+                <span>Admin User</span>
+            </div>
+        </div>
+
+        <!-- Bookings Container -->
+        <div class="bookings-container">
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <div class="filter-item">
+                        <label>Status</label>
+                        <select id="statusFilter">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label>Destination</label>
+                        <select id="destinationFilter">
+                            <option value="all">All Destinations</option>
+                            <option value="goa">Goa</option>
+                            <option value="kerala">Kerala</option>
+                            <option value="agra">Agra</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label>Date Range</label>
+                        <input type="date" id="dateFilter">
+                    </div>
+                    <div class="filter-item">
+                        <label>Search</label>
+                        <input type="text" id="searchFilter" placeholder="Search by booking ID or customer name">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings Table -->
+            <table class="bookings-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Customer</th>
+                        <th>Destination</th>
+                        <th>Package</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#BK001</td>
+                        <td>John Doe</td>
+                        <td>Goa</td>
+                        <td>Beach Package</td>
+                        <td>2024-03-20</td>
+                        <td>₹25,000</td>
+                        <td><span class="status-badge confirmed">Confirmed</span></td>
+                        <td>
+                            <button class="action-btn view">View</button>
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#BK002</td>
+                        <td>Jane Smith</td>
+                        <td>Kerala</td>
+                        <td>Backwater Package</td>
+                        <td>2024-03-21</td>
+                        <td>₹35,000</td>
+                        <td><span class="status-badge pending">Pending</span></td>
+                        <td>
+                            <button class="action-btn view">View</button>
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#BK003</td>
+                        <td>Mike Johnson</td>
+                        <td>Agra</td>
+                        <td>Heritage Package</td>
+                        <td>2024-03-22</td>
+                        <td>₹20,000</td>
+                        <td><span class="status-badge cancelled">Cancelled</span></td>
+                        <td>
+                            <button class="action-btn view">View</button>
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button>Previous</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/isotope.min.js"></script>
+    <script src="../assets/js/owl-carousel.js"></script>
+    <script src="../assets/js/wow.js"></script>
+    <script src="../assets/js/tabs.js"></script>
+    <script src="../assets/js/popup.js"></script>
+    <script src="../assets/js/custom.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle sidebar navigation
+            const navLinks = document.querySelectorAll('.admin-sidebar .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Handle filters
+            const filters = document.querySelectorAll('.filter-item select, .filter-item input');
+            filters.forEach(filter => {
+                filter.addEventListener('change', function() {
+                    // Add your filter logic here
+                    console.log('Filter changed:', this.id, this.value);
+                });
+            });
+
+            // Handle action buttons
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.classList[1];
+                    const bookingId = this.closest('tr').querySelector('td:first-child').textContent;
+                    
+                    switch(action) {
+                        case 'view':
+                            alert(`Viewing booking ${bookingId}`);
+                            break;
+                        case 'edit':
+                            alert(`Editing booking ${bookingId}`);
+                            break;
+                        case 'delete':
+                            if(confirm(`Are you sure you want to delete booking ${bookingId}?`)) {
+                                alert(`Booking ${bookingId} deleted`);
+                            }
+                            break;
+                    }
+                });
+            });
+
+            // Handle pagination
+            const paginationButtons = document.querySelectorAll('.pagination button');
+            paginationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    paginationButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    // Add your pagination logic here
+                    console.log('Page changed:', this.textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
